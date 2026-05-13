@@ -25,14 +25,15 @@ import { OPPORTUNITIES } from "@/lib/data"
 
 export function DashboardContent() {
   const stats = [
-    { label: "Active Bids", value: "24", change: "+12", type: "up" },
+    { label: "Active Bids", value: "39", change: "+15", type: "up" },
     { label: "Bids Due (7 days)", value: "2", change: "Urgent", type: "warning" },
-    { label: "Supplier Quotes", value: "15", change: "Ready", type: "neutral" },
-    { label: "Pipeline Value", value: "$8.4M", change: "+24%", type: "up" },
+    { label: "Supplier Quotes", value: "18", change: "Ready", type: "neutral" },
+    { label: "Pipeline Value", value: "$12.4M", change: "+32%", type: "up" },
   ]
 
-  // Show top 5 recent opportunities
-  const recentBids = OPPORTUNITIES.slice(0, 5)
+  // Flatten all items from groups for the recent bids list
+  const allOpps = OPPORTUNITIES.flatMap(group => group.items)
+  const recentBids = allOpps.slice(0, 5)
 
   return (
     <div className="p-8 space-y-8">
@@ -97,11 +98,11 @@ export function DashboardContent() {
                   </div>
                   <div className="flex items-center gap-4">
                     <div className="text-right">
-                      <p className="text-sm font-semibold">{bid.value}</p>
+                      <p className="text-sm font-semibold">Active</p>
                       <p className="text-[10px] text-muted-foreground uppercase">Due: {bid.dueDate}</p>
                     </div>
                     <Badge variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20 border-primary/20">
-                      Active
+                      View
                     </Badge>
                   </div>
                 </div>
