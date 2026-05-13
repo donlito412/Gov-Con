@@ -4,9 +4,8 @@ import * as React from "react"
 import { 
   Search, 
   ExternalLink, 
-  Info,
   Filter,
-  ArrowRight
+  Globe
 } from "lucide-react"
 import { 
   Card, 
@@ -27,25 +26,18 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import { PORTALS } from "@/lib/data"
 
 export function ProcurementDirectory() {
-  const portals = [
-    { name: "GovTribe", url: "https://govtribe.com", category: "Federal/SLED", focus: "Intelligence & Pursuit" },
-    { name: "HigherGov", url: "https://highergov.com", category: "Federal/SLED", focus: "Market Intel" },
-    { name: "SAM.gov", url: "https://sam.gov", category: "Federal", focus: "Prime Opportunities" },
-    { name: "PennBid", url: "https://pennbid.procureware.com", category: "PA State", focus: "Local Government" },
-    { name: "Bonfire", url: "https://alleghenycounty.bonfirehub.com", category: "Allegheny County", focus: "Municipal/Schools" },
-    { name: "BidNet Direct", url: "https://bidnetdirect.com", category: "SLED", focus: "National Local" },
-    { name: "DemandStar", url: "https://demandstar.com", category: "SLED", focus: "Government Purchasing" },
-    { name: "Sourcewell", url: "https://sourcewell-mn.gov", category: "Cooperative", focus: "Volume Sales" },
-    { name: "GovWin IQ", url: "https://iq.govwin.com", category: "Enterprise", focus: "Capture Management" },
-    { name: "Beacon Bid", url: "https://beaconbid.com", category: "Pittsburgh", focus: "City/School Bids" },
-    { name: "OpenGov", url: "https://procurement.opengov.com", category: "SLED", focus: "City/County Procurement" },
-    { name: "IonWave", url: "https://ionwave.net", category: "Education", focus: "School Purchasing" },
-  ]
+  const [search, setSearch] = React.useState("")
+
+  const filteredPortals = PORTALS.filter(p => 
+    p.name.toLowerCase().includes(search.toLowerCase()) || 
+    p.category.toLowerCase().includes(search.toLowerCase())
+  )
 
   return (
-    <div className="flex-1 space-y-6 p-8 overflow-y-auto scrollbar-hide">
+    <div className="p-8 space-y-6">
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Procurement Site Directory</h2>
         <p className="text-muted-foreground">Unified access to all 40+ government procurement portals and bid boards.</p>
@@ -54,7 +46,12 @@ export function ProcurementDirectory() {
       <div className="flex items-center gap-4">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search portals by name, state, or category..." className="pl-9" />
+          <Input 
+            placeholder="Search portals by name, state, or category..." 
+            className="pl-9 bg-card/50" 
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
         <Button variant="outline">
           <Filter size={16} className="mr-2" />
@@ -62,39 +59,42 @@ export function ProcurementDirectory() {
         </Button>
       </div>
 
-      <Card>
+      <Card className="bg-card/50 backdrop-blur-sm overflow-hidden">
         <CardHeader>
           <CardTitle>Global Bid Boards</CardTitle>
           <CardDescription>Click any portal to open the official procurement interface.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-0">
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-accent/30">
               <TableRow>
-                <TableHead>Portal Name</TableHead>
+                <TableHead className="pl-6">Portal Name</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Primary Focus</TableHead>
-                <TableHead className="text-right">Action</TableHead>
+                <TableHead className="text-right pr-6">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {portals.map((portal, i) => (
-                <TableRow key={i} className="hover:bg-accent/50 transition-colors cursor-pointer group">
-                  <TableCell className="font-bold">{portal.name}</TableCell>
+              {filteredPortals.map((portal, i) => (
+                <TableRow key={i} className="hover:bg-accent/50 transition-colors cursor-pointer group border-border/50">
+                  <TableCell className="font-bold pl-6 flex items-center gap-2">
+                    <Globe size={16} className="text-primary/50" />
+                    {portal.name}
+                  </TableCell>
                   <TableCell>
-                    <Badge variant="secondary" className="bg-primary/5 text-primary border-primary/20">
+                    <Badge variant="secondary" className="bg-primary/5 text-primary border-primary/20 text-[10px] uppercase font-bold tracking-tight">
                       {portal.category}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-muted-foreground">{portal.focus}</TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-muted-foreground text-sm">{portal.focus}</TableCell>
+                  <TableCell className="text-right pr-6">
                     <a 
                       href={portal.url} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+                      className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "hover:bg-primary hover:text-white transition-all")}
                     >
-                      Open <ExternalLink size={14} className="ml-2" />
+                      Open Portal <ExternalLink size={14} className="ml-2" />
                     </a>
                   </TableCell>
                 </TableRow>
