@@ -16,7 +16,7 @@ import {
   CardTitle 
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Table,
   TableBody,
@@ -26,6 +26,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 
 export function ProcurementDirectory() {
   const portals = [
@@ -87,11 +88,14 @@ export function ProcurementDirectory() {
                   </TableCell>
                   <TableCell className="text-muted-foreground">{portal.focus}</TableCell>
                   <TableCell className="text-right">
-                    <Button variant="ghost" size="sm" asChild>
-                      <a href={portal.url} target="_blank" rel="noopener noreferrer">
-                        Open <ExternalLink size={14} className="ml-2" />
-                      </a>
-                    </Button>
+                    <a 
+                      href={portal.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={cn(buttonVariants({ variant: "ghost", size: "sm" }))}
+                    >
+                      Open <ExternalLink size={14} className="ml-2" />
+                    </a>
                   </TableCell>
                 </TableRow>
               ))}

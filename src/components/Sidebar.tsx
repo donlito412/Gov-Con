@@ -96,7 +96,7 @@ export function Sidebar({ activeTab, setActiveTab, className }: SidebarProps) {
 
       <div className="border-t p-4">
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger>
             <Button variant="ghost" className={cn("w-full justify-start gap-3 px-2", isCollapsed ? "px-1" : "")}>
               <Avatar className="h-8 w-8">
                 <AvatarImage src="/avatar.png" alt="User" />

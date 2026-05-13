@@ -10,7 +10,8 @@ import {
   FileText, 
   ExternalLink,
   ChevronRight,
-  Search
+  Search,
+  Building2
 } from "lucide-react"
 import { 
   Card, 
@@ -21,8 +22,9 @@ import {
 } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 
 export function OpportunitiesHub() {
   const tabs = [
@@ -137,9 +139,9 @@ export function OpportunitiesHub() {
                       </div>
                       <div className="flex gap-2">
                         <Button size="sm" variant="ghost">Save</Button>
-                        <Button size="sm">
+                        <a href="#" className={cn(buttonVariants({ size: "sm" }))}>
                           View Bid <ExternalLink size={14} className="ml-2" />
-                        </Button>
+                        </a>
                       </div>
                     </div>
                   </CardContent>
