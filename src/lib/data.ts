@@ -101,51 +101,61 @@ export const SUPPLIER_DIRECTORY = [
 ];
 
 export const OPPORTUNITIES = [
-  // Goods & Supplies
-  { title: "Traffic Signal Equipment", agency: "City of Pittsburgh", category: "Goods", dueDate: "Active", value: "TBD", portal: "Beacon", tags: ["Traffic", "Electrical"] },
-  { title: "Arrow Board RFQ", agency: "DOMI", category: "Goods", dueDate: "Active", value: "RFQ", portal: "Beacon", tags: ["Fleet", "Safety"] },
-  { title: "Equipment Trailer RFQ", agency: "DOMI", category: "Goods", dueDate: "Active", value: "RFQ", portal: "Beacon", tags: ["Fleet", "Logistics"] },
-  { title: "Janitorial Supplies", agency: "PRT", category: "Goods", dueDate: "Active", value: "TBD", portal: "OpenGov", tags: ["Facilities"] },
-  { title: "Specialty Gases (IFB)", agency: "Allegheny County", category: "Goods", dueDate: "Active", value: "IFB", portal: "Bonfire", tags: ["Industrial"] },
-  { title: "Water/Sewer Materials", agency: "PWSA", category: "Goods", dueDate: "Active", value: "TBD", portal: "PWSA", tags: ["Infrastructure"] },
-  { title: "American Flags (IFB# 9422)", agency: "Allegheny County", category: "Goods", dueDate: "Active", value: "Annual", portal: "Bonfire", tags: ["General"] },
-  { title: "Warehouse Lift Truck", agency: "PPS", category: "Goods", dueDate: "May 15, 2026", value: "$45k est", portal: "Beacon", tags: ["Equipment"] },
-  { title: "Engine Replacement Parts", agency: "Allegheny County", category: "Goods", dueDate: "Active", value: "Ongoing", portal: "Bonfire", tags: ["Fleet"] },
-  { title: "Cleaning Solvent Service", agency: "Allegheny County", category: "Goods", dueDate: "Active", value: "Service", portal: "Bonfire", tags: ["Industrial"] },
-  { title: "Oil and Fuel Analysis", agency: "Allegheny County", category: "Goods", dueDate: "Active", value: "Service", portal: "Bonfire", tags: ["Fleet"] },
-  { title: "Gear Lubricant", agency: "Allegheny County", category: "Goods", dueDate: "Active", value: "Supply", portal: "Bonfire", tags: ["Fleet"] },
-  { title: "Waste Oil Removal", agency: "Allegheny County", category: "Goods", dueDate: "Active", value: "Service", portal: "Bonfire", tags: ["Environmental"] },
-  { title: "Vision Care (#9410)", agency: "Allegheny County", category: "Goods", dueDate: "Active", value: "Managed", portal: "Bonfire", tags: ["Medical"] },
-
-  // Real Estate & Development
-  { title: "OMI Building Redevelopment", agency: "URA", category: "Real Estate", dueDate: "Active", value: "Mixed-use", portal: "URA", tags: ["Development"] },
-  { title: "Lower Hill Redevelopment", agency: "URA", category: "Real Estate", dueDate: "Active", value: "Infrastructure", portal: "URA", tags: ["Security", "FF&E"] },
-  { title: "Brushton Station ETOD", agency: "PRT", category: "Real Estate", dueDate: "Active", value: "Transit-oriented", portal: "OpenGov", tags: ["Development"] },
-  { title: "Real Estate Appraisal Pool", agency: "HACP", category: "Real Estate", dueDate: "Rolling", value: "Multiple", portal: "HACP", tags: ["Appraisal"] },
-  { title: "Pre-Demolition Asbestos Survey", agency: "City of PGH", category: "Real Estate", dueDate: "Rolling", value: "Survey", portal: "Beacon", tags: ["Environmental"] },
-  { title: "Lower Hill Housing RFP", agency: "URA", category: "Real Estate", dueDate: "Active", value: "Smart Building", portal: "URA", tags: ["Residential"] },
-  { title: "Transit Retail Space", agency: "PRT", category: "Real Estate", dueDate: "Active", value: "Lease", portal: "OpenGov", tags: ["Leasing"] },
-
-  // AI & Professional Services
-  { title: "Enterprise AI Platform", agency: "Sourcewell", category: "AI / Tech", dueDate: "Active", value: "National", portal: "Sourcewell", tags: ["AI", "Automation"] },
-  { title: "State Government AI Chatbot", agency: "Michigan", category: "AI / Tech", dueDate: "Active", value: "Statewide", portal: "MI Portal", tags: ["AI", "UX"] },
-  { title: "AI Education Platforms", agency: "Ed Tech JPA", category: "AI / Tech", dueDate: "Active", value: "Multiple", portal: "Ed Tech JPA", tags: ["EdTech", "AI"] },
-  { title: "AI Consultant Opportunity", agency: "Various", category: "AI / Tech", dueDate: "Active", value: "Strategy", portal: "DemandStar", tags: ["Consulting"] },
-  { title: "District AI Training", agency: "Providence SD", category: "AI / Tech", dueDate: "Active", value: "Training", portal: "BidNet", tags: ["Training"] },
-  { title: "Digital Credentialing", agency: "PASSHE", category: "AI / Tech", dueDate: "Active", value: "Analytics", portal: "PASSHE", tags: ["AI", "Data"] },
-  { title: "Enterprise Data Env", agency: "PASSHE", category: "AI / Tech", dueDate: "Active", value: "BI", portal: "PASSHE", tags: ["Data", "IT"] },
-  { title: "Invoice Automation", agency: "PA DOE", category: "AI / Tech", dueDate: "Active", value: "OCR", portal: "eMarketplace", tags: ["AI", "Finance"] },
-  { title: "Workforce Analysis (RFP 26-23)", agency: "PRT", category: "AI / Tech", dueDate: "Active", value: "Consulting", portal: "OpenGov", tags: ["Analytics"] },
-  { title: "Structured Data Cabling", agency: "City of PGH", category: "AI / Tech", dueDate: "Active", value: "Infrastructure", portal: "Beacon", tags: ["IT Infra"] },
-  { title: "Marketing/Utility Consulting", agency: "PRT", category: "AI / Tech", dueDate: "Active", value: "Service", portal: "OpenGov", tags: ["Consulting"] },
-
-  // Infrastructure & Construction
-  { title: "Boiler Upgrades (#202601)", agency: "PPS", category: "Infrastructure", dueDate: "May 18, 2026", value: "HVAC", portal: "Beacon Bid", tags: ["Renovation"] },
-  { title: "Playground Renovations", agency: "Allegheny County", category: "Infrastructure", dueDate: "Active", value: "Public Works", portal: "Bonfire", tags: ["Park"] },
-  { title: "ACJ Detention Center Reno", agency: "Allegheny County", category: "Infrastructure", dueDate: "Active", value: "Construction", portal: "Bonfire", tags: ["Security"] },
-  { title: "Roof Replacement", agency: "Allegheny County", category: "Infrastructure", dueDate: "Active", value: "South Park", portal: "Bonfire", tags: ["Roofing"] },
-  { title: "Biology Lab Renovations", agency: "CCAC", category: "Infrastructure", dueDate: "Active", value: "CCAC", portal: "Bonfire", tags: ["Renovation"] },
-  { title: "Smithfield St Reconstruction", agency: "City of PGH", category: "Infrastructure", dueDate: "Active", value: "Streetscape", portal: "Beacon", tags: ["Roadwork"] },
-  { title: "Detention Center HVAC", agency: "Allegheny County", category: "Infrastructure", dueDate: "Active", value: "HVAC", portal: "Bonfire", tags: ["HVAC"] },
-  { title: "Traffic Control Rental", agency: "Allegheny County", category: "Infrastructure", dueDate: "Active", value: "Rental", portal: "Bonfire", tags: ["Roadwork"] },
+  { group: "Infrastructure / Public Works", items: [
+    { title: "Traffic Signal Equipment", agency: "City of Pittsburgh", dueDate: "Active", portal: "Beacon", tags: ["Signal Heads", "Controllers", "Cabinets", "Poles", "Wiring"] },
+    { title: "DOMI Trailer-Mounted Arrowboard RFQ", agency: "DOMI", dueDate: "Active", portal: "Beacon", tags: ["Traffic Management", "Arrow Boards", "Safety"] },
+    { title: "DOMI Equipment Trailer RFQ", agency: "DOMI", dueDate: "Active", portal: "Beacon", tags: ["Utility Trailers", "Fleet"] },
+    { title: "Compact Utility Vehicle Procurement", agency: "City of PGH", dueDate: "Active", portal: "Beacon", tags: ["Fleet", "Utility Vehicles"] },
+    { title: "Backup Emergency Generator", agency: "Mellon Square Garage", dueDate: "Active", portal: "Beacon", tags: ["Electrical", "Infrastructure"] },
+    { title: "Junction Box Frames Procurement", agency: "City of PGH", dueDate: "Active", portal: "Beacon", tags: ["Metal Fabrication", "Utility Castings"] },
+  ]},
+  { group: "WATER / SEWER / UTILITIES", items: [
+    { title: "PWSA 2026 Sewer Reconstruction IDIQ", agency: "PWSA", dueDate: "Active", portal: "PWSA", tags: ["Infrastructure", "Sewer"] },
+    { title: "PWSA Urgent Sewer CM/CI Services", agency: "PWSA", dueDate: "Active", portal: "PWSA", tags: ["CM/CI", "Professional"] },
+    { title: "Lead Service Line QA/QC Services", agency: "PWSA", dueDate: "Active", portal: "PWSA", tags: ["QA/QC", "Lead"] },
+    { title: "Lead Service Line CM/CI Services", agency: "PWSA", dueDate: "Active", portal: "PWSA", tags: ["CM/CI", "Lead"] },
+    { title: "Catch Basin & Inlet Replacement", agency: "PWSA", dueDate: "Active", portal: "PWSA", tags: ["Replacement", "Sewer"] },
+    { title: "Small Diameter Sewer Rehabilitation IDIQ", agency: "PWSA", dueDate: "Active", portal: "PWSA", tags: ["Rehab", "Sewer"] },
+  ]},
+  { group: "FLEET / TRANSPORTATION", items: [
+    { title: "PWSA Fleet Purchase Opportunity", agency: "PWSA", dueDate: "Active", portal: "PWSA", tags: ["Fleet Procurement"] },
+    { title: "Pittsburgh Regional Transit Fleet Maintenance", agency: "PRT", dueDate: "Active", portal: "OpenGov", tags: ["Supplies", "Maintenance"] },
+    { title: "Police Drone Support Van Procurement", agency: "City of PGH", dueDate: "Active", portal: "Beacon", tags: ["Fleet", "Specialty Vehicle"] },
+  ]},
+  { group: "JANITORIAL / SUPPLY / CONSUMABLES", items: [
+    { title: "PRT Janitorial Supplies", agency: "PRT", dueDate: "Active", portal: "OpenGov", tags: ["Facilities", "Cleaning"] },
+    { title: "Allegheny Intermediate Unit Supply Bid", agency: "AIU", dueDate: "Active", portal: "AIU Portal", tags: ["Educational Supplies"] },
+    { title: "Allegheny County Specialty Gases IFB", agency: "Allegheny County", dueDate: "Active", portal: "Bonfire", tags: ["Specialty Gases"] },
+    { title: "Liquid Bituminous Material IFB", agency: "Allegheny County", dueDate: "Active", portal: "Bonfire", tags: ["Construction Materials"] },
+  ]},
+  { group: "EDUCATION OPPORTUNITIES", items: [
+    { title: "PPS Surveillance Systems", agency: "PPS", dueDate: "Active", portal: "PPS Beacon", tags: ["Security", "IT"] },
+    { title: "PPS Physician Services", agency: "PPS", dueDate: "Active", portal: "PPS Beacon", tags: ["Medical", "Services"] },
+    { title: "PPS Behavioral Health Staffing", agency: "PPS", dueDate: "Active", portal: "PPS Beacon", tags: ["Health", "Staffing"] },
+    { title: "PPS Solar Photovoltaic Systems", agency: "PPS", dueDate: "Active", portal: "PPS Beacon", tags: ["Energy", "Solar"] },
+    { title: "PPS Audio Equipment", agency: "PPS", dueDate: "Active", portal: "PPS Beacon", tags: ["AV", "Education"] },
+    { title: "PPS Furniture & Operational Supplies", agency: "PPS", dueDate: "Active", portal: "PPS Beacon", tags: ["Furniture", "Operations"] },
+  ]},
+  { group: "REAL ESTATE / REDEVELOPMENT", items: [
+    { title: "OMI Building Redevelopment", agency: "URA", dueDate: "Active", portal: "URA RFP", tags: ["Strip District", "Mixed-use"] },
+    { title: "Lower Hill Redevelopment Housing RFP", agency: "URA", dueDate: "Active", portal: "URA RFP", tags: ["Residential", "Lower Hill"] },
+    { title: "Smithfield Street Reconstruction & Retail", agency: "City of PGH", dueDate: "Active", portal: "Beacon", tags: ["Activation", "Infrastructure"] },
+    { title: "Brushton Station Transit-Oriented Development", agency: "PRT", dueDate: "Active", portal: "OpenGov", tags: ["ETOD", "Study"] },
+  ]},
+  { group: "NATIONAL AI CONTRACT OPPORTUNITIES", items: [
+    { title: "Sourcewell Enterprise AI Platform RFP", agency: "Sourcewell", dueDate: "Active", portal: "Sourcewell", tags: ["Enterprise AI", "National"] },
+    { title: "Michigan Government AI Chatbot", agency: "Michigan", dueDate: "Active", portal: "MI Portal", tags: ["AI Chatbot", "UX"] },
+    { title: "Ed Tech JPA AI Platform Contract", agency: "Ed Tech JPA", dueDate: "Active", portal: "Ed Tech JPA", tags: ["Education AI", "SLED"] },
+    { title: "Long Beach AI Consultant Opportunity", agency: "Long Beach", dueDate: "Active", portal: "DemandStar", tags: ["AI Strategy", "Consulting"] },
+    { title: "Providence SD AI Training", agency: "Providence SD", dueDate: "Active", portal: "BidNet", tags: ["AI Education", "Training"] },
+  ]},
+  { group: "PENNSYLVANIA AI OPPORTUNITIES", items: [
+    { title: "PASSHE Digital Credentialing Platform", agency: "PASSHE", dueDate: "Active", portal: "PASSHE", tags: ["AI", "Credentials"] },
+    { title: "PASSHE Enterprise Data Environment", agency: "PASSHE", dueDate: "Active", portal: "PASSHE", tags: ["Data Env", "Support"] },
+    { title: "PASSHE Third Iron Digital Services", agency: "PASSHE", dueDate: "Active", portal: "PASSHE", tags: ["Digital Services", "Extension"] },
+    { title: "PA DOE Buy American Invoice Tracking", agency: "PA DOE", dueDate: "Active", portal: "eMarketplace", tags: ["OCR", "AI Tracking"] },
+  ]},
+  { group: "FEDERAL / HYBRID OPPORTUNITY", items: [
+    { title: "USACE PEWARS Office Upgrades", agency: "US Army Corps of Engineers", dueDate: "Active", portal: "SAM.gov", tags: ["HVAC", "Electrical", "Flooring", "Reconstruction"] },
+  ]},
 ];
