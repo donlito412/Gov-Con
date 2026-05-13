@@ -61,7 +61,7 @@ export function SupplierHub() {
               </div>
 
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {filteredSuppliers.map((vendor, i) => (
+                {filteredSuppliers.map((vendor: any, i) => (
                   <Card key={i} className="hover:border-primary/40 transition-all group bg-card/10 backdrop-blur-sm border-border/50">
                     <CardHeader className="pb-3">
                       <div className="flex items-center justify-between">
@@ -77,7 +77,7 @@ export function SupplierHub() {
                       <div className="flex items-center gap-4">
                         <div className="flex-1 p-3 rounded-xl bg-background/40 border border-border/20 text-center">
                           <p className="text-[10px] text-muted-foreground mb-1 uppercase font-bold tracking-tighter">Terms</p>
-                          <p className="text-xs font-bold">{vendor.terms || "TBD"}</p>
+                          <p className="text-xs font-bold">{vendor.terms || "N/A"}</p>
                         </div>
                         <div className="flex-1 p-3 rounded-xl bg-background/40 border border-border/20 text-center">
                           <p className="text-[10px] text-muted-foreground mb-1 uppercase font-bold tracking-tighter">Type</p>
