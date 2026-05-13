@@ -2,14 +2,13 @@
 
 import * as React from "react"
 import { 
-  Database, 
   CreditCard, 
-  Package, 
-  ShieldCheck,
-  Star,
+  ShieldAlert,
   Search,
   ExternalLink,
-  Truck
+  Truck,
+  Building2,
+  Clock
 } from "lucide-react"
 import { 
   Card, 
@@ -32,73 +31,66 @@ export function SupplierHub() {
   )
 
   return (
-    <div className="p-8 space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="p-8 space-y-6 h-full flex flex-col overflow-hidden">
+      <div className="shrink-0 flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">Supplier & Vendor Hub</h2>
-          <p className="text-muted-foreground">Manage Net 30/60 credit accounts and supplier catalogs from your research.</p>
+          <p className="text-muted-foreground text-sm mt-1">Registry of researched wholesalers for Net 30/60 accounts.</p>
         </div>
-        <Button className="shadow-lg shadow-primary/20">Add New Partner</Button>
+        <Button className="shadow-lg shadow-primary/20">Add Supplier</Button>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 shrink-0">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input 
-            placeholder="Search vendors by category, terms, or name..." 
+            placeholder="Search by category or vendor name..." 
             className="pl-9 bg-card/50" 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <Button variant="outline">Filters</Button>
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filteredSuppliers.map((vendor, i) => (
-          <Card key={i} className="hover:border-primary/50 transition-all group bg-card/50 backdrop-blur-sm overflow-hidden">
-            <CardHeader className="pb-4">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-xl group-hover:text-primary transition-colors">
+      <div className="flex-1 overflow-y-auto pr-2 scrollbar-hide">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {filteredSuppliers.map((vendor, i) => (
+            <Card key={i} className="hover:border-primary/40 transition-all group bg-card/20 backdrop-blur-sm border-border/50">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-widest border-primary/30 text-primary/80">
+                    {vendor.category}
+                  </Badge>
+                </div>
+                <CardTitle className="text-xl group-hover:text-primary transition-colors mt-2 font-bold">
                   {vendor.name}
                 </CardTitle>
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={10} className={j < vendor.rating ? "fill-amber-500 text-amber-500" : "text-muted-foreground"} />
-                  ))}
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex-1 p-3 rounded-lg bg-background/50 border border-border/30 text-center">
+                    <p className="text-[10px] text-muted-foreground mb-1 uppercase font-bold">Terms</p>
+                    <p className="text-sm font-bold">{vendor.terms}</p>
+                  </div>
+                  <div className="flex-1 p-3 rounded-lg bg-background/50 border border-border/30 text-center">
+                    <p className="text-[10px] text-muted-foreground mb-1 uppercase font-bold">Primary Focus</p>
+                    <p className="text-sm font-bold truncate">{vendor.focus}</p>
+                  </div>
                 </div>
-              </div>
-              <CardDescription className="flex items-center gap-2">
-                <Truck size={14} /> {vendor.category}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="p-3 rounded-xl bg-accent/30 text-center border border-border/50">
-                  <p className="text-[10px] text-muted-foreground mb-1 uppercase font-bold tracking-tighter">
-                    Payment Terms
-                  </p>
-                  <p className="font-bold text-primary">{vendor.terms}</p>
-                </div>
-                <div className="p-3 rounded-xl bg-accent/30 text-center border border-border/50">
-                  <p className="text-[10px] text-muted-foreground mb-1 uppercase font-bold tracking-tighter">
-                    Primary Focus
-                  </p>
-                  <p className="font-bold">{vendor.focus}</p>
-                </div>
-              </div>
 
-              <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                <Badge variant="secondary" className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 text-[10px] py-0.5">
-                  <ShieldCheck size={12} className="mr-1" /> Approved
-                </Badge>
-                <Button variant="ghost" size="sm" className="text-xs group-hover:text-primary">
-                  View Account <ExternalLink size={14} className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+                <div className="flex items-center justify-between pt-4 border-t border-border/40">
+                  <div className="flex items-center gap-1.5 text-amber-500/80">
+                    <ShieldAlert size={14} />
+                    <span className="text-[10px] font-bold uppercase tracking-tight">Setup Required</span>
+                  </div>
+                  <Button variant="ghost" size="sm" className="h-8 text-xs hover:bg-primary hover:text-white transition-all">
+                    Apply Now <ExternalLink size={12} className="ml-2" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -2,16 +2,13 @@
 
 import * as React from "react"
 import { 
-  Globe, 
-  MapPin, 
-  Calendar, 
-  DollarSign, 
-  Tag, 
-  FileText, 
-  ExternalLink,
-  ChevronRight,
-  Search,
-  Building2
+  Search, 
+  ExternalLink, 
+  Filter,
+  Building2,
+  Calendar,
+  DollarSign,
+  Tag
 } from "lucide-react"
 import { 
   Card, 
@@ -24,6 +21,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { cn } from "@/lib/utils"
 import { OPPORTUNITIES } from "@/lib/data"
 
@@ -31,11 +36,11 @@ export function OpportunitiesHub() {
   const [searchQuery, setSearchQuery] = React.useState("")
   
   const tabs = [
-    { id: "all", label: "All Opportunities" },
-    { id: "Goods", label: "Goods & Supplies" },
+    { id: "all", label: "All Bids" },
+    { id: "Goods", label: "Goods" },
+    { id: "Infrastructure", label: "Infrastructure" },
     { id: "Real Estate", label: "Real Estate" },
     { id: "AI / Tech", label: "AI & Tech" },
-    { id: "Professional", label: "Prof. Services" },
   ]
 
   const filteredOpps = OPPORTUNITIES.filter(opp => {
@@ -45,97 +50,95 @@ export function OpportunitiesHub() {
   })
 
   return (
-    <div className="p-8 space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">Opportunities Hub</h2>
-          <p className="text-muted-foreground">Manage and track your procurement pipeline across all sectors.</p>
-        </div>
+    <div className="p-8 space-y-6 h-full flex flex-col overflow-hidden">
+      <div className="shrink-0">
+        <h2 className="text-3xl font-bold tracking-tight">Opportunities Hub</h2>
+        <p className="text-muted-foreground text-sm mt-1">Live solicitation tracking across all researched portals.</p>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 shrink-0">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input 
-            placeholder="Search solicitations, NAICS, or agencies..." 
+            placeholder="Filter by title, agency, or keyword..." 
             className="pl-9 bg-card/50" 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <Button variant="outline">Filters</Button>
+        <Button variant="outline" size="sm">
+          <Filter size={14} className="mr-2" />
+          Filter
+        </Button>
       </div>
 
-      <Tabs defaultValue="all" className="space-y-6">
-        <TabsList className="bg-card/50 border h-auto p-1 grid grid-cols-2 md:grid-cols-5 gap-1 backdrop-blur-sm">
+      <Tabs defaultValue="all" className="flex-1 flex flex-col overflow-hidden">
+        <TabsList className="bg-card/30 border h-auto p-1 mb-4 shrink-0">
           {tabs.map(tab => (
-            <TabsTrigger key={tab.id} value={tab.id} className="text-xs py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+            <TabsTrigger key={tab.id} value={tab.id} className="text-xs py-2 px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
               {tab.label}
             </TabsTrigger>
           ))}
         </TabsList>
 
-        {tabs.map(tab => (
-          <TabsContent key={tab.id} value={tab.id} className="space-y-4">
-            <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-2">
-              {filteredOpps
-                .filter(opp => tab.id === "all" || opp.category === tab.id)
-                .map((opp, i) => (
-                <Card key={i} className="group hover:border-primary/50 transition-all overflow-hidden relative bg-card/50 backdrop-blur-sm">
-                  <div className="absolute top-0 right-0 p-4">
-                    <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20">
-                      Match: {Math.floor(Math.random() * 20) + 75}%
-                    </Badge>
-                  </div>
-                  
-                  <CardHeader className="pb-4">
-                    <CardTitle className="text-xl group-hover:text-primary transition-colors leading-tight pr-12">
-                      {opp.title}
-                    </CardTitle>
-                    <CardDescription className="flex items-center gap-2 mt-1">
-                      <Building2 size={14} /> {opp.agency}
-                    </CardDescription>
-                  </CardHeader>
-                  
-                  <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Tag size={14} /> Category: <span className="text-foreground font-medium">{opp.category}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <FileText size={14} /> Portal: <span className="text-foreground font-medium">{opp.portal}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Calendar size={14} /> Due: <span className="text-foreground font-medium">{opp.dueDate}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <DollarSign size={14} /> Value: <span className="text-foreground font-medium">{opp.value}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      {opp.tags.map((tag, j) => (
-                        <Badge key={j} variant="secondary" className="text-[10px] bg-accent/50">{tag}</Badge>
-                      ))}
-                    </div>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                      <Button size="sm" variant="ghost">Save to CRM</Button>
-                      <a href="#" className={cn(buttonVariants({ size: "sm" }), "shadow-md")}>
-                        View Bid <ExternalLink size={14} className="ml-2" />
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-            {filteredOpps.filter(opp => tab.id === "all" || opp.category === tab.id).length === 0 && (
-              <div className="text-center py-20 text-muted-foreground">
-                No opportunities found in this category.
-              </div>
-            )}
-          </TabsContent>
-        ))}
+        <div className="flex-1 overflow-y-auto border rounded-lg bg-card/30 backdrop-blur-sm scrollbar-hide">
+          {tabs.map(tab => (
+            <TabsContent key={tab.id} value={tab.id} className="m-0 border-none">
+              <Table>
+                <TableHeader className="bg-muted/50 sticky top-0 z-10 backdrop-blur-md">
+                  <TableRow className="hover:bg-transparent border-b">
+                    <TableHead className="w-[40%] font-bold">Opportunity Title</TableHead>
+                    <TableHead className="font-bold">Agency</TableHead>
+                    <TableHead className="font-bold">Due Date</TableHead>
+                    <TableHead className="font-bold">Portal</TableHead>
+                    <TableHead className="text-right font-bold pr-6">Action</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredOpps
+                    .filter(opp => tab.id === "all" || opp.category === tab.id)
+                    .map((opp, i) => (
+                    <TableRow key={i} className="group border-b border-border/40 hover:bg-primary/5 transition-colors">
+                      <TableCell>
+                        <div className="space-y-1">
+                          <p className="font-bold text-sm leading-none group-hover:text-primary transition-colors">{opp.title}</p>
+                          <div className="flex gap-1">
+                            {opp.tags.map((tag, j) => (
+                              <span key={j} className="text-[10px] text-muted-foreground uppercase tracking-tighter">#{tag}</span>
+                            ))}
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-xs font-medium">{opp.agency}</TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className={cn(
+                          "text-[10px] font-bold px-2 py-0",
+                          opp.dueDate.includes("May") ? "border-amber-500/50 text-amber-500 bg-amber-500/5" : "border-emerald-500/50 text-emerald-500 bg-emerald-500/5"
+                        )}>
+                          {opp.dueDate}
+                        </Badge>
+                      </TableCell>
+                      <TableCell className="text-[10px] uppercase font-bold text-muted-foreground">{opp.portal}</TableCell>
+                      <TableCell className="text-right pr-6">
+                        <a 
+                          href="#" 
+                          className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "h-8 px-2 text-xs hover:bg-primary hover:text-white")}
+                        >
+                          Details <ExternalLink size={12} className="ml-1.5" />
+                        </a>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+              {filteredOpps.filter(opp => tab.id === "all" || opp.category === tab.id).length === 0 && (
+                <div className="flex flex-col items-center justify-center py-20 text-muted-foreground italic">
+                  No opportunities found in this category.
+                </div>
+              )}
+            </TabsContent>
+          ))}
+        </div>
       </Tabs>
     </div>
   )
