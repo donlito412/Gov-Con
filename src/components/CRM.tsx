@@ -11,7 +11,8 @@ import {
   Building2, 
   Briefcase,
   MoreVertical,
-  CalendarDays
+  CalendarDays,
+  UserCheck
 } from "lucide-react"
 import { 
   Card, 
@@ -26,83 +27,51 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 
 export function CRM() {
-  const contacts = [
-    { name: "Sarah Jenkins", role: "Senior Procurement Officer", agency: "Allegheny County", email: "sjenkins@alleghenycounty.us", lastContact: "2 days ago", type: "Officer" },
-    { name: "Robert Miller", role: "Prime Partner", agency: "Miller Construction", email: "bob@millerconst.com", lastContact: "1 week ago", type: "Prime" },
-    { name: "David Chen", role: "Subcontractor", agency: "Chen Electrical", email: "dchen@chenelec.com", lastContact: "3 days ago", type: "Sub" },
-  ]
-
   return (
-    <div className="flex-1 space-y-6 p-8 overflow-y-auto scrollbar-hide">
-      <div className="flex items-center justify-between">
+    <div className="p-8 space-y-8 h-full flex flex-col overflow-hidden relative z-10 pointer-events-auto">
+      <div className="shrink-0 flex items-center justify-between">
         <div>
           <h2 className="text-3xl font-bold tracking-tight">CRM & Networking</h2>
-          <p className="text-muted-foreground">Manage your relationships with procurement officers and partners.</p>
+          <p className="text-muted-foreground text-sm mt-1">Manage your relationships with procurement officers and partners.</p>
         </div>
-        <Button>
+        <Button className="font-bold uppercase text-[10px] shadow-lg shadow-primary/20">
           <UserPlus size={16} className="mr-2" /> Add Contact
         </Button>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 shrink-0">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-          <Input placeholder="Search by name, agency, or role..." className="pl-9" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input placeholder="Search your network by name or agency..." className="pl-9 bg-card/50" />
         </div>
-        <Button variant="outline">Filters</Button>
+        <Button variant="outline" size="sm" className="h-10 font-bold uppercase text-[10px] tracking-widest">Filters</Button>
       </div>
 
-      <div className="grid gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Core Contacts</CardTitle>
-            <CardDescription>Key stakeholders in your procurement network.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {contacts.map((contact, i) => (
-                <div key={i} className="flex items-center justify-between p-4 rounded-lg border bg-card/50 hover:bg-accent/50 transition-all group">
-                  <div className="flex items-center gap-4">
-                    <Avatar className="h-10 w-10 border shadow-sm">
-                      <AvatarImage src="" alt={contact.name} />
-                      <AvatarFallback className="bg-primary/10 text-primary">{contact.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                    </Avatar>
-                    <div className="space-y-0.5">
-                      <p className="text-sm font-bold leading-none">{contact.name}</p>
-                      <p className="text-xs text-muted-foreground">{contact.role} • {contact.agency}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-6">
-                    <div className="text-right space-y-1">
-                      <Badge variant="secondary" className="text-[10px] uppercase font-bold tracking-tighter">
-                        {contact.type}
-                      </Badge>
-                      <p className="text-[10px] text-muted-foreground flex items-center justify-end gap-1">
-                        <CalendarDays size={10} /> Last: {contact.lastContact}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Button variant="ghost" size="icon" className="h-8 w-8"><Mail size={14} /></Button>
-                      <Button variant="ghost" size="icon" className="h-8 w-8"><Phone size={14} /></Button>
-                      <Button variant="ghost" size="icon" className="h-8 w-8"><MoreVertical size={14} /></Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="p-8 rounded-2xl bg-primary/5 border border-primary/10 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="space-y-2 text-center md:text-left">
-          <h3 className="text-xl font-bold tracking-tight">AI Relationship Insight</h3>
-          <p className="text-sm text-muted-foreground max-w-xl">
-            Sarah Jenkins from Allegheny County has released 3 new RFPs today in your category. 
-            **Recommendation**: Send a follow-up email regarding IFB 9422.
-          </p>
+      <div className="flex-1 flex flex-col space-y-6 overflow-hidden">
+        <div className="flex-1 border-2 border-dashed rounded-3xl flex flex-col items-center justify-center text-center p-12 space-y-4 bg-accent/5">
+          <div className="p-4 rounded-full bg-primary/5 text-primary/40">
+            <UserCheck size={40} />
+          </div>
+          <div className="max-w-xs">
+            <p className="text-sm font-bold uppercase tracking-widest">Network is Empty</p>
+            <p className="text-xs text-muted-foreground mt-1">You haven't added any procurement officers or partners yet. Use the "Add Contact" button to begin building your database.</p>
+          </div>
         </div>
-        <Button size="lg" className="shadow-lg shadow-primary/20">Draft Follow-up</Button>
+
+        <div className="p-8 rounded-3xl bg-primary/5 border border-primary/10 flex flex-col md:flex-row items-center justify-between gap-6 shrink-0">
+          <div className="space-y-2 text-center md:text-left">
+            <h3 className="text-lg font-bold tracking-tight flex items-center gap-2 justify-center md:justify-start">
+              <span className="p-1.5 rounded-lg bg-primary text-white shadow-sm shadow-primary/50"><Users size={16} /></span>
+              Relationship Intelligence
+            </h3>
+            <p className="text-xs text-muted-foreground max-w-xl font-medium">
+              Your AI Hunter Agent will automatically find Points of Contact (POCs) for active solicitations once you start tracking bids.
+            </p>
+          </div>
+          <Button variant="outline" size="sm" className="font-bold uppercase text-[10px] tracking-widest border-primary/30 text-primary hover:bg-primary hover:text-white transition-all">
+            Link Bid Board
+          </Button>
+        </div>
       </div>
     </div>
   )

@@ -6,12 +6,11 @@ import {
   Search, 
   Upload, 
   FolderPlus, 
-  Folder,
+  Folder, 
   MoreVertical,
-  Download,
-  Eye,
+  ShieldCheck,
   FileSearch,
-  CheckCircle2
+  HardDrive
 } from "lucide-react"
 import { 
   Card, 
@@ -26,106 +25,81 @@ import { Badge } from "@/components/ui/badge"
 
 export function DocumentManagement() {
   const folders = [
-    { name: "Active Bids", count: 12 },
-    { name: "Submitted Bids", count: 8 },
-    { name: "Contracts Won", count: 4 },
-    { name: "Compliance Docs", count: 24 },
-    { name: "Supplier Catalogs", count: 15 },
-    { name: "Certifications", count: 6 },
-  ]
-
-  const files = [
-    { name: "capability-statement-2024.pdf", size: "1.2 MB", type: "PDF", date: "2024-05-10", status: "Verified" },
-    { name: "sam-registration-renewal.pdf", size: "2.4 MB", type: "PDF", date: "2024-04-15", status: "Active" },
-    { name: "pricing-sheet-grainger.xlsx", size: "450 KB", type: "XLSX", date: "2024-05-12", status: "New" },
+    { name: "Active Bids", count: 0 },
+    { name: "Submitted Bids", count: 0 },
+    { name: "Contracts Won", count: 0 },
+    { name: "Compliance Docs", count: 0 },
+    { name: "Supplier Catalogs", count: 0 },
+    { name: "Certifications", count: 0 },
   ]
 
   return (
-    <div className="flex h-full overflow-hidden">
-      <div className="w-64 border-r p-6 space-y-6 overflow-y-auto scrollbar-hide">
+    <div className="p-8 space-y-8 h-full flex flex-col overflow-hidden relative z-10 pointer-events-auto">
+      <div className="shrink-0 flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-bold tracking-tight">Documents</h2>
-          <p className="text-xs text-muted-foreground mt-1">Managed AI File Storage</p>
+          <h2 className="text-3xl font-bold tracking-tight">Document Management</h2>
+          <p className="text-muted-foreground text-sm mt-1">Secure repository for your capability statements, proposals, and compliance files.</p>
         </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" className="font-bold uppercase text-[10px]">
+            <FolderPlus size={16} className="mr-2" /> New Folder
+          </Button>
+          <Button size="sm" className="font-bold uppercase text-[10px] shadow-lg shadow-primary/20">
+            <Upload size={16} className="mr-2" /> Upload File
+          </Button>
+        </div>
+      </div>
 
-        <div className="space-y-1">
+      <div className="flex items-center gap-4 shrink-0">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input placeholder="AI OCR Search across all documents..." className="pl-9 bg-card/50" />
+        </div>
+      </div>
+
+      <div className="flex-1 flex gap-8 overflow-hidden">
+        {/* Folders Sidebar */}
+        <div className="w-64 space-y-2 overflow-y-auto pr-2 scrollbar-hide">
           {folders.map((folder, i) => (
-            <div key={i} className="flex items-center justify-between p-2 rounded-lg hover:bg-accent/50 cursor-pointer group transition-all">
+            <div key={i} className="flex items-center justify-between p-3 rounded-xl border border-transparent hover:border-border/50 hover:bg-card/50 cursor-pointer transition-all group">
               <div className="flex items-center gap-3">
-                <Folder size={18} className="text-muted-foreground group-hover:text-primary transition-colors" />
-                <span className="text-sm font-medium">{folder.name}</span>
+                <Folder size={18} className="text-primary/70 group-hover:text-primary transition-colors" />
+                <span className="text-sm font-bold">{folder.name}</span>
               </div>
-              <span className="text-[10px] bg-accent px-1.5 py-0.5 rounded text-muted-foreground">{folder.count}</span>
+              <span className="text-[10px] font-bold bg-accent/50 px-1.5 py-0.5 rounded-md text-muted-foreground">{folder.count}</span>
             </div>
           ))}
         </div>
 
-        <Button variant="outline" className="w-full justify-start gap-2 border-dashed border-2 hover:border-primary/50">
-          <FolderPlus size={16} /> New Folder
-        </Button>
-      </div>
-
-      <div className="flex-1 space-y-6 p-8 overflow-y-auto scrollbar-hide">
-        <div className="flex items-center justify-between">
-          <div className="relative w-96">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input placeholder="AI OCR Search across all documents..." className="pl-9" />
+        {/* File Grid - Scrubbed of placeholders */}
+        <div className="flex-1 flex flex-col space-y-4">
+          <div className="flex-1 border-2 border-dashed rounded-3xl flex flex-col items-center justify-center text-center p-12 space-y-4 bg-accent/5">
+            <div className="p-4 rounded-full bg-primary/5 text-primary/40">
+              <HardDrive size={40} />
+            </div>
+            <div className="max-w-xs">
+              <p className="text-sm font-bold uppercase tracking-widest">Vault is Empty</p>
+              <p className="text-xs text-muted-foreground mt-1">No documents have been uploaded yet. Start by dragging files here or creating a new folder.</p>
+            </div>
+            <Button variant="outline" size="sm" className="mt-4">
+              Browse Files
+            </Button>
           </div>
-          <Button>
-            <Upload size={16} className="mr-2" /> Upload File
-          </Button>
-        </div>
 
-        <div className="grid gap-4">
-          <Card>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-sm">Recent Files</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {files.map((file, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 rounded-lg border bg-card/50 hover:bg-accent/50 transition-all group">
-                    <div className="flex items-center gap-4">
-                      <div className="p-2 rounded bg-primary/10 text-primary">
-                        <FileText size={20} />
-                      </div>
-                      <div className="space-y-0.5">
-                        <p className="text-sm font-bold leading-none">{file.name}</p>
-                        <p className="text-[10px] text-muted-foreground">{file.size} • Uploaded {file.date}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <Badge variant="secondary" className="bg-emerald-500/10 text-emerald-500 border-emerald-500/20 text-[10px]">
-                        <CheckCircle2 size={10} className="mr-1" /> {file.status}
-                      </Badge>
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Button variant="ghost" size="icon" className="h-8 w-8"><Eye size={14} /></Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8"><Download size={14} /></Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8"><MoreVertical size={14} /></Button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+          <div className="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
+                <FileSearch size={20} />
               </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/20 flex items-center justify-between">
-          <div className="flex gap-4 items-center">
-            <div className="p-3 rounded-xl bg-blue-500/10 text-blue-500">
-              <FileSearch size={24} />
+              <div>
+                <p className="text-xs font-bold text-blue-500 uppercase tracking-tight">AI Intelligence Scan Active</p>
+                <p className="text-[10px] text-muted-foreground">The system is ready to index your files for instant compliance verification.</p>
+              </div>
             </div>
-            <div className="space-y-1">
-              <p className="text-sm font-bold text-blue-500 underline">AI Intelligence Scan Active</p>
-              <p className="text-[10px] text-muted-foreground">
-                Currently indexing 45 documents for instant AI compliance verification.
-              </p>
-            </div>
+            <Button size="sm" variant="outline" className="h-8 text-[10px] uppercase font-bold border-blue-500/30 text-blue-500 hover:bg-blue-500 hover:text-white transition-all">
+              Run Scan
+            </Button>
           </div>
-          <Button variant="outline" size="sm" className="text-[10px] bg-blue-500/10 text-blue-500 border-blue-500/30 hover:bg-blue-500 hover:text-white">
-            Run Scan
-          </Button>
         </div>
       </div>
     </div>
